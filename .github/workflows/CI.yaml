@@ -2,11 +2,11 @@ name: Test
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
-  demo: 
+  demo:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,7 +25,7 @@ jobs:
 
       - name: Run Black
         run: black --check --diff .
-        
+
       - name: Run Flake8
         run: flake8 app.py
 
