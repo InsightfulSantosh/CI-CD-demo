@@ -1,4 +1,4 @@
-pre-commit 
-flake8-docstrings 
+pre-commit
+flake8-docstrings
 flake8
 black
