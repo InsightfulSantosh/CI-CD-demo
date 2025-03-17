@@ -3,30 +3,31 @@ name: Test
 on:
   push:
     branches: 
-      - main  # Fixed indentation and spacing
+      - main
 
 jobs:
   demo: 
-    runs-on: ubuntu-latest  # Fixed "run-on" -> "runs-on"
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository  # Each step must be in a list
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Setup Python  # Step names should be properly formatted
+      - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.10"  # YAML values should be inside quotes
+          python-version: "3.10"
 
-      - name: Setup Flake8  # Proper indentation
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install flake8
+          pip install flake8 black pre-commit
 
+      - name: Run Black
+        run: black --check --diff .
+        
       - name: Run Flake8
         run: flake8 app.py
 
-            # Step 5: Run pre-commit hooks (Black & Flake8) - CI Fails If Formatting Is Wrong
-     
       - name: Run pre-commit hooks
         run: pre-commit run --all-files --show-diff-on-failure
